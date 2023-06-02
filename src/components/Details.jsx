@@ -13,6 +13,10 @@ const Details = () => {
     premiered: "",
     time: "",
     day: "",
+    username: "test",
+   email:"test@example",
+    phone:"1234567890",
+    seats: 1,
   });
   console.log(formData);
   useEffect(() => {
@@ -41,9 +45,9 @@ const Details = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    // Perform form submission logic here
-    console.log(formData);
     // You can save the form data to local/session storage if needed
+    localStorage.setItem("formData", JSON.stringify(formData));
+
     // Reset form fields
     setFormData({
       movieName: "",
@@ -51,6 +55,10 @@ const Details = () => {
       premiered: "",
       time: "",
       day: "",
+      username: "",
+      email:"",
+      phone:"",
+      seats: 1,
       // Reset other form field values
     });
   };
@@ -59,7 +67,9 @@ const Details = () => {
     <div className="container">
       {show ? (
         <div className="show-detail">
-          <h1 className="show-title" style={{fontSize:"30px"}}>{show.name}</h1>
+          <h1 className="show-title" style={{ fontSize: "30px" }}>
+            {show.name}
+          </h1>
           <div>
             <img
               className="show-image-detail"
@@ -154,14 +164,76 @@ const Details = () => {
                   }
                   disabled
                 />
+                <label htmlFor="movieName">User Name:</label>
+                 <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  value={formData.username}
+                  onChange={(e) =>
+                    setFormData((prevState) => ({
+                      ...prevState,
+                      username: e.target.value,
+                    }))
+                  }
+                />
+                <label htmlFor="movieName">Email:</label>
+                 <input
+                  type="text"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={(e) =>
+                    setFormData((prevState) => ({
+                      ...prevState,
+                      email: e.target.value,
+                    }))
+                  }
+                  
+                />
+                <label htmlFor="movieName">Phone:</label>
+                <input
+                  type="text"
+                  id="phone"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={(e) =>
+                    setFormData((prevState) => ({
+                      ...prevState,
+                      phone: e.target.value,
+                    }))
+                  }
+                  
+                />
+                <label htmlFor="movieName">Seats:</label>
+                <input
+                  type="text"
+                  id="seats"
+                  name="seats"
+                  value={formData.seats}
+                  onChange={(e) =>
+                    setFormData((prevState) => ({
+                      ...prevState,
+                      seats: e.target.value,
+                    }))
+                  }
+                  
+                />
               </div>
-              {/* Add other relevant form fields */}
               <button type="submit">Submit</button>
             </form>
           )}
         </div>
       ) : (
-        <p style={{display:"flex",alignItems:"center",justifyContent:"center"}}>Loading...</p>
+        <p
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          Loading...
+        </p>
       )}
     </div>
   );

@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import "../styles.css";
 
 const ShowCard = ({ show }) => {
-  console.log(show);
   return (
     <div className="show-card">
       <img className="show-image" src={show.show.image.medium} alt={show.name} />
